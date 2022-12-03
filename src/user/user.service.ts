@@ -8,10 +8,10 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UserService {
     @InjectRepository(User)
-    private readonly repository: Repository<User>;
+    private readonly userRepository: Repository<User>;
 
-    public async getUser(email: string): Promise<User> {
-        return this.repository.findOne({ where: { email: email } });
+    public async getUser(email: string | null): Promise<User[]> {
+        return this.userRepository.find({ where: { email: email } });
     }
 
     public async createUser(body: CreateUserDto): Promise<User> {
@@ -21,6 +21,6 @@ export class UserService {
         user.email = body.email;
         user.password = await Encrypt.encryptPassword(body.password);
 
-        return this.repository.save(user);
+        return this.userRepository.save(user);
     }
 }

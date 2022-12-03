@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from 'src/api/user/user.service';
+import { UserService } from 'src/user/user.service';
 import { Encrypt } from 'src/shared/encrypt';
 
 @Injectable()
@@ -11,7 +11,8 @@ export class AuthService {
     ) { }
 
     async validateUser(username: string, pass: string): Promise<any> {
-        const user = await this.usersService.getUser(username);
+        const dsa = await this.usersService.getUser(username);
+        const user = await (await this.usersService.getUser(username))[0];
         const validPass = await Encrypt.validatePassword(pass, user.password);
         if (user && validPass) {
             const { password, ...result } = user;

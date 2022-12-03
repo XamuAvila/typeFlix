@@ -16,7 +16,7 @@ export class UserController {
     @Get()
     @UseGuards(JwtAuthGuard)
     @ApiBearerAuth('JWT-auth')
-    async getUser(@Query('email') email: string): Promise<User> {
+    async getUser(@Query('email') email: string): Promise<User[]> {
         return await this.userService.getUser(email);
     }
 }

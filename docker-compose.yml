@@ -1,14 +1,18 @@
+version: '3.1'
+
 services:
-  database:
+  db:
     image: postgres
     restart: always
     ports:
       - 5432:5432
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: typeFlix2
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: myPass
-      
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+
   adminer:
     image: adminer
     restart: always
