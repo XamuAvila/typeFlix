@@ -10,8 +10,8 @@ export class UserService {
     @InjectRepository(User)
     private readonly repository: Repository<User>;
 
-    public async getUser(id: number): Promise<User> {
-        return this.repository.findOne({ where: { id: id } });
+    public async getUser(email: string): Promise<User> {
+        return this.repository.findOne({ where: { email: email } });
     }
 
     public async createUser(body: CreateUserDto): Promise<User> {
