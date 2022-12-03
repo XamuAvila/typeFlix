@@ -1,0 +1,16 @@
+services:
+  database:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: typeFlix2
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: myPass
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
