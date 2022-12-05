@@ -22,7 +22,11 @@ export class MovieService {
     }
 
     async getMovie(id: number): Promise<Movie[]> {
-        return this.movieRepository.find({ where: { id: id } });
+        return this.movieRepository.find({ where: { id: id, isDeleted: false } });
+    }
+
+    async getMovieByName(name: string): Promise<Movie> {
+        return this.movieRepository.findOne({ where: { name: name } })
     }
 
     async deleteMovie(id: number): Promise<{ message: string }> {
@@ -30,7 +34,7 @@ export class MovieService {
         movie[0].isDeleted = true;
         this.movieRepository.update({ id: id }, { isDeleted: true })
         return {
-            "message": "User updated"
+            "message": "Movie deleted"
         }
     }
 }

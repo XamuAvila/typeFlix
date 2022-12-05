@@ -6,6 +6,9 @@ import { AuthModule } from './auth/auth.module';
 import { AppController } from './app.controller';
 import { UserModule } from './user/user.module';
 import { MovieModule } from './movie/movie.module';
+import { CommandModule } from 'nestjs-command';
+import { MovieService } from './movie/movie.service';
+import { MoviesCommand } from './movie/movie.command';
 
 @Module({
   imports: [
@@ -13,8 +16,10 @@ import { MovieModule } from './movie/movie.module';
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
     UserModule,
     AuthModule,
-    MovieModule
+    MovieModule,
+    CommandModule
   ],
   controllers: [AppController],
+  providers: [MoviesCommand]
 })
 export class AppModule { }

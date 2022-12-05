@@ -18,3 +18,10 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+  redis:
+    image: docker.io/bitnami/redis:7.0
+    environment:
+      - REDIS_PASSWORD=redisPW
+    ports:
+      - '6379:6379'
