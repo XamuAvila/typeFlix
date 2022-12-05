@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Inject, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, CacheInterceptor, Controller, Delete, Get, Inject, Param, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { CreateMovieDto } from './dto/createMovieDto';
 import { Movie } from './entities/movie.entity';
 import { MovieService } from './movie.service';
@@ -26,8 +26,16 @@ export class MovieController {
 
     @UseGuards(JwtAuthGuard)
     @ApiBearerAuth('JWT-auth')
+    @Get()
+    async getMovies(): Promise<Movie[]> {
+        return await this.movieService.getMovies();
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth('JWT-auth')
     @Delete(":id")
     async deleteMovie(@Param("id") id: number): Promise<{ message: string }> {
         return await this.movieService.deleteMovie(id);
     }
+
 }
