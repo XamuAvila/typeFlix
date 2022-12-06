@@ -15,7 +15,7 @@ Tecnologias
 # Start da Aplicação
 
 ## Antes de tudo vamos criar um .env na raíz do projeto 
-_existe um .env.example na raíz do projeto com portas caso você seja preguiçoso igual a mim e não quer ficar verificando as portas disponíveis na sua máquina daí é só copiar e colar :)_
+_existe um .env.example na raíz do projeto com portas caso você não queira ficar verificando as portas disponíveis na sua máquina daí é só copiar e colar :)_
 ```
 PORT=
 NODE_ENV=
