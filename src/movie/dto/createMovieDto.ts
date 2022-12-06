@@ -1,26 +1,31 @@
-import { IsString, IsNotEmpty, MaxLength, IsArray, IsInt, IsBoolean } from 'class-validator'
-import { ApiProperty } from "@nestjs/swagger"
+import {
+  IsString,
+  IsNotEmpty,
+  MaxLength,
+  IsArray,
+  IsInt,
+} from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 export class CreateMovieDto {
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(120)
+  public name: string;
 
-    @ApiProperty()
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(120)
-    public name: string;
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(120)
+  public synopsis: string;
 
-    @ApiProperty()
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(120)
-    public synopsis: string;
+  @ApiProperty()
+  @IsArray()
+  @IsNotEmpty()
+  public actors: string[];
 
-    @ApiProperty()
-    @IsArray()
-    @IsNotEmpty()
-    public actors: string[]
-
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsInt()
-    public stars: number
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsInt()
+  public stars: number;
 }

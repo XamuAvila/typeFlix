@@ -1,73 +1,78 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# TypeFlix
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Repositório feito em NestJs com catálogo de filmes gerados
+randomicamente para uma API.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Tecnologias 
+* NestJs/NodeJs (4 anos)
+* TypeOrm (Ja comecei a aplicar em uma empresa mas trocaram)
+* Postgres (Db relacional 4 anos)
+* Redis 
+* Docker (Compose e Dockerfile)
+* Swagger
+* Jwt
 
-## Description
+# Start da Aplicação
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Antes de tudo vamos criar um .env na raíz do projeto 
+_existe um .env.example na raíz do projeto com portas caso você seja preguiçoso igual a mim e não quer ficar verificando as portas disponíveis na sua máquina daí é só copiar e colar :)_
+```
+PORT=
+NODE_ENV=
 
-## Installation
+DATABASE_HOST=
+DATABASE_PORT=
+DATABASE_NAME=
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_PREFIX=
 
-```bash
-$ npm install
+REDIS_HOST=
+REDIS_PORT=
+REDIS_PASSWORD=
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+Primeiramente é necessário rodar o comando na raiz do projeto
+```
+npm install
+```
+Depois, com o Docker instalado na máquina podemos rodar o comando a seguir
+para inicializar o redis e o Postgres
+```
+docker-compose up
 ```
 
-## Test
+Depois que todo o ambiente estiver instalado e as instâncias
+do docker estiverem rodando, vamos popular o banco de dados.
 
-```bash
-# unit tests
-$ npm run test
+Eu sei da existência das seeders mas preferi usar um commander do 
+NestJs pois gosto BASTANTE do framework e aprendo até nos testes
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+``` 
+npm run create:movies
 ```
 
-## Support
+Agora é somente startar o projeto, criar um usuário e show!
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+URL do swagger: 
+```
+localhost:3000/api
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Para começar a usar a API
+* Criar usuário
+  * POST /user
+* Login
+  * POST /login
+    * BEARER _seu token_
 
-## License
+Features a implementar ou negociar:
+* Testes
+  * Tenho repositório de testes em NodeJs/NestJs utilizando Jest
+    * Links: 
+      * https://github.com/XamuAvila/TestsTS
+      * https://github.com/XamuAvila/tvTracker/blob/main/src/tests/users.test.ts
+* Deploy em alguma plataforma
 
-Nest is [MIT licensed](LICENSE).
+

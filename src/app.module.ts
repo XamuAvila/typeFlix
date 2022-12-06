@@ -10,7 +10,8 @@ import { CommandModule } from 'nestjs-command';
 import { MoviesCommand } from './movie/commands/movie.command';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { CacheInterceptor } from '@nestjs/common/cache';
-import * as redisStore from 'cache-manager-redis-store';
+import { WinstonModule, utilities as nestWinstonModuleUtilities } from 'nest-winston';
+import winston from 'winston'
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -22,20 +23,21 @@ import * as redisStore from 'cache-manager-redis-store';
       store: 'redisStore',
       host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
-      password: process.env.REDIS_PASSWORD
+      password: process.env.REDIS_PASSWORD,
     }),
     UserModule,
     AuthModule,
     MovieModule,
-    CommandModule
+    CommandModule,
   ],
   controllers: [AppController],
-  providers: [MoviesCommand,
+  providers: [
+    MoviesCommand,
 
     {
       provide: APP_INTERCEPTOR,
       useClass: CacheInterceptor,
     },
-  ]
+  ],
 })
 export class AppModule { }
