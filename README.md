@@ -72,12 +72,12 @@ Para começar a usar a API
 - Criar usuário
   - POST /user
 - Login
+
   - POST /login
     - BEARER _seu token_
 
-Features a implementar ou negociar:
-
 - Testes
+  - npm run test
   - Tenho repositório de testes em NodeJs/NestJs utilizando Jest
     - Links:
       - https://github.com/XamuAvila/TestsTS

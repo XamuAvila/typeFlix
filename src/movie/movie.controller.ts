@@ -13,11 +13,13 @@ import { Movie } from './entities/movie.entity';
 import { MovieService } from './movie.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/auth-guards/jwt-auth.guard';
+import { Put } from '@nestjs/common/decorators';
+import { UpdateMovieDto } from './dto/updateMovieDto';
 
 @ApiTags('Movie')
 @Controller('movie')
 export class MovieController {
-  constructor(@Inject(MovieService) private movieService: MovieService) {}
+  constructor(@Inject(MovieService) private movieService: MovieService) { }
 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth('JWT-auth')
@@ -45,5 +47,12 @@ export class MovieController {
   @Delete(':id')
   async deleteMovie(@Param('id') id: number): Promise<{ message: string }> {
     return await this.movieService.deleteMovie(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('JWT-auth')
+  @Put(':id')
+  async updateMovie(@Param('id') id: number, @Body() movie: UpdateMovieDto): Promise<{ message: string }> {
+    return await this.movieService.updateMovie(id, movie);
   }
 }

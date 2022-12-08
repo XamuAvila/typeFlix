@@ -14,6 +14,7 @@ export class Movie {
   @Column({ type: 'varchar', length: 120, unique: true })
   public name: string;
 
+  @Column({ type: 'varchar', length: 120 })
   public synopsis: string;
 
   @Column('varchar', { array: true })

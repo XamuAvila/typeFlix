@@ -5,6 +5,8 @@ import { Movie } from './entities/movie.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateMovieDto } from './dto/createMovieDto';
+import { InternalServerErrorException } from '@nestjs/common/exceptions';
+import { UpdateMovieDto } from './dto/updateMovieDto';
 @Injectable()
 export class MovieService {
     @InjectRepository(Movie)
@@ -25,11 +27,13 @@ export class MovieService {
     }
 
     async getMovie(id: number): Promise<Movie[]> {
-        const foundMovie: Movie[] = await this.movieRepository.find({ where: { id: id, isDeleted: false } });
-        if (!foundMovie.length) {
+        try {
+            const foundMovie: Movie = await this.movieRepository.findOneOrFail({ where: { id: id, isDeleted: false } });
+
+            return [foundMovie];
+        } catch (error) {
             throw new NotFoundException("Movie not found");
         }
-        return foundMovie;
     }
 
     async getMovies(): Promise<Movie[]> {
@@ -64,5 +68,16 @@ export class MovieService {
         return {
             message: 'Movie deleted',
         };
+    }
+
+    async updateMovie(id: number, movie: UpdateMovieDto): Promise<{ message: string }> {
+        try {
+            await this.movieRepository.update({ id: id }, movie);
+            return {
+                message: "Movie updated successfully"
+            }
+        } catch (error) {
+            throw new InternalServerErrorException("Error on updating movie");
+        }
     }
 }
