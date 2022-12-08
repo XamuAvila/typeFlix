@@ -14,7 +14,7 @@ export class MoviesCommand {
     describe: 'create movies',
   })
   async create() {
-    for (let x = 0; x <= 5000; x++) {
+    for (let x = 0; x <= 1000; x++) {
       const name = faker.lorem.words(2);
       const movie = await this.movieService.getMovieByName(name);
       if (!movie) {
