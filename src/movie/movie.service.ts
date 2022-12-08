@@ -53,9 +53,6 @@ export class MovieService {
 
     async getMovieByName(name: string): Promise<Movie> {
         const movie: Movie = await this.movieRepository.findOne({ where: { name: name } });
-        if (!movie) {
-            throw new NotFoundException("Not found movie with this name")
-        }
         return movie;
     }
 
